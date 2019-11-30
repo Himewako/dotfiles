@@ -1,0 +1,1 @@
+/Users/tomohiro/.zprezto/runcoms/zlogin
