@@ -58,9 +58,7 @@ setopt correct
 
 
 # ━━━━━━━━━     === プロンプト関係 ===     ━━━━━━━━━
-#                                                 
-#                                                 
-#                                                 
+
 
 
 # バージョン管理システムの情報表示機能を使う
@@ -70,25 +68,33 @@ setopt prompt_subst
 # プロンプト表示前に実行される関数
 precmd () { vcs_info }
 
+
+PROMPT='
+`upper_left`
+`status_code`'
+
+PROMPT2='[%n]> '
+
+SPROMPT='`suggest`'
+
+
+
 # vcs_infoの設定のカスタマイズ
 # 有効にする(指定してgitのみにしてる)
 zstyle ':vcs_info:*' enable git
 # formatsの%uと%cを使えるようにする
 zstyle ':vcs_info:git:*' check-for-changes true
 # ステージされているがコミットされていないファイルがあるときの設定
-zstyle ':vcs_info:git:*' stagedstr "%F{226}+%f"
+zstyle ':vcs_info:git:*' stagedstr "%{%F{226}%}+%{%f%}"
 # ステージされていないファイルがあるときの設定
-zstyle ':vcs_info:git:*' unstagedstr "%F{196}!%f"
+zstyle ':vcs_info:git:*' unstagedstr "%{%F{196}%}!%{%f%}"
 # vcs_info_msg_0_で表示する内容の設定
-zstyle ':vcs_info:*' formats "%F{046} %b %f%c%u" 
+zstyle ':vcs_info:*' formats "%{%F{046}%} %b %{%f%}%c%u" 
 # rebase途中やmergeでコンフリクトが発生したり等の特別な状況で表示される
-zstyle ':vcs_info:*' actionsformats "%K{196}%F{227} %b | ! %a %f%k%c%u"
+zstyle ':vcs_info:*' actionsformats "%{%K{196}%F{227}%} %b | ! %a %{%f%k%}%c%u"
 
 RPROMPT='${vcs_info_msg_0_}'
 
-# RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
-# autoload -Uz vcs_info
-# setopt prompt_subst
 # zstyle ':vcs_info:git:*' check-for-changes true
 # zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 # zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
@@ -98,19 +104,7 @@ RPROMPT='${vcs_info_msg_0_}'
 # RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 
-PROMPT="
-`upper_left`
-`status_code`"
 
-PROMPT2='[%n]> '
-
-SPROMPT='`suggest`'
-
-
-
-#                                                 
-#                                                 
-#                                                 
 # ━━━━━━━━━   === プロンプト関係終了 ===   ━━━━━━━━━
 
 
@@ -165,11 +159,37 @@ bindkey "^S" history-incremental-search-forward
 #                                                      
 
 
+
+# Homebrew と anaconda の干渉回避( brew じだけ anaconda のパスを取り除く)
+alias brew="env PATH=${PATH/${HOME}\/.pyenv\/shims:/} brew"
+
 # 次作コマンドなど。必要に応じてコメントアウト
+# iTerm2の透過度変更スクリプト
 alias tp=it_transparency.sh
 
 
 #                                                      
 #                                                      
 #                                                      
-# ━━━━━━━━━   === alias(履歴)関係終了 ===   ━━━━━━━━━
+# ━━━━━━━━━   === alias関係終了 ===   ━━━━━━━━━
+
+
+# ━━━━━━━━━     === 表示関係 ===     ━━━━━━━━━
+#                                                      
+#                                                      
+#                                                      
+
+
+# 改行のない行を表示させる(効果が出ないので一時コメントアウト)
+# unsetopt promptcr
+
+
+#                                                      
+#                                                      
+#                                                      
+# ━━━━━━━━━   === 表示関係終了 ===   ━━━━━━━━━
+
+
+
+#pyenv用の設定
+eval "$(pyenv init -)"

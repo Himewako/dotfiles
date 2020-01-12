@@ -1,9 +1,12 @@
 status_code () {
-		local color face
-		
-		color="%(?.${fg[green]}.${fg[blue]})"
-		face="%(?!(｡╹ω╹｡)何する〜? < !(ｏдｏlll%)できんかった < )"
-#		face="%(?!(*'-') < !(*;-;%)? < )"
+		local ok="(｡╹ω╹｡)何する〜? < "
+		local ng="(ｏдｏlll%)できんかった < "
 
-		echo "${color}${face}${reset_color}"
+		local color face reset
+		
+		color="%{%(?.${fg[green]}.${fg[blue]})%}"
+		face="%(?!${ok}!${ng})"
+		reset="%{${reset_color}%}"
+
+		echo "${color}${face}${reset}"
 }
