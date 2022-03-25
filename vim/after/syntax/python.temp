@@ -1,0 +1,10 @@
+"if exists("b:current_syntax")
+"		finish
+"endif
+
+" シンタックス定義
+"syntax match pySpecial "("
+"syntax match pySpecial ")"
+
+" ハイライト定義
+"highlight link pySpecial Special

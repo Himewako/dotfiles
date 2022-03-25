@@ -11,3 +11,6 @@ export ZSH_CONFIG_DIR="${HOME}/.configFiles/zsh"
 if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+alias tp=transparency.sh
+alias chrome="open -a 'Google Chrome'"

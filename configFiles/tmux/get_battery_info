@@ -1,0 +1,77 @@
+#!/bin/sh
+
+
+discharging_sym=(     )
+   charging_sym=(     )
+
+
+if battery_info=$(/usr/bin/pmset -g ps | awk '{ if (NR == 2) print $3 " " $4 }' | sed -e "s/;//g" -e "s/%//") ; then
+		battery_quantity=$(echo $battery_info | awk '{print $1}')
+
+		echo ${battery_info}
+
+		sym_idx=$(( $battery_quantity / 20 + 1 ))
+
+		if [[ ! $battery_info =~ "discharging" ]]; then
+				# 充電中
+				if [[ $battery_quantity -eq 100 ]]; then
+						battery=" ${battery_quantity}% #[fg=colour082]${charging_sym[0]} #[default] "
+				elif [[ $battery_quantity -gt 50 ]]; then
+						battery=" ${battery_quantity}% #[fg=colour050]${charging_sym[${sym_idx}]} #[default] "
+				elif [[ $battery_quantity -gt 20 ]]; then
+						battery=" ${battery_quantity}% #[fg=colour011]${charging_sym[${sym_idx}]} #[default] "
+				elif [[ $battery_quantity -le 20 ]]; then
+						battery=" ${battery_quantity}% #[fg=colour009]${charging_sym[${sym_idx}]} #[default] "
+				fi
+		else
+				if [[ $battery_quantity -eq 100 ]]; then
+						battery=" ${battery_quantity}% #[fg=colour082]${discharging_sym[0]} #[default] "
+				elif [[ $battery_quantity -gt 50 ]]; then
+						battery=" ${battery_quantity}% #[fg=colour050]${discharging_sym[${sym_idx}]} #[default] "
+				elif [[ $battery_quantity -gt 20 ]]; then
+						battery=" ${battery_quantity}% #[fg=colour011]${discharging_sym[${sym_idx}]} #[default] "
+				elif [[ $battery_quantity -le 20 ]]; then
+						battery=" ${battery_quantity}% #[fg=colour009]${discharging_sym[${sym_idx}]} #[default] "
+				fi
+		fi
+		echo $battery
+fi
+
+#                        
+
+# if battery_info=$(/usr/bin/pmset -g ps | awk '{ if (NR == 2) print $3 " " $4 }' | sed -e "s/;//g" -e "s/%//") ; then
+# 		battery_quantity=$(echo $battery_info | awk '{print $1}')
+# 
+# 		echo ${battery_info}
+# 
+# 		sym_idx=$(( $battery_quantity / 20 + 1 ))
+# 
+# 		if [[ ! $battery_info =~ "discharging" ]]; then
+# 				# 充電中
+# #				if [ $battery_quantity -eq 100 ]; then
+# #						battery=" ${battery_quantity}% #[fg=colour082]${charging_sym[0]}#[default] "
+# #				elif (( $battery_quantity > 50 )); then
+# 				if (( $battery_quantity > 50 )); then
+# 						if (( $battery_quantity == 100 )); then
+# 								battery=" test "
+# #								battery=" ${battery_quantity}% #[fg=colour082]${charging_sym[0]}#[default] "
+# 						fi
+# 						battery=" ${battery_quantity}% #[fg=colour050]${charging_sym[${sym_idx}]}#[default] "
+# 				elif (( $battery_quantity > 20 )); then
+# 						battery=" ${battery_quantity}% #[fg=colour011]${charging_sym[${sym_idx}]}#[default] "
+# 				else
+# 						battery=" ${battery_quantity}% #[fg=colour009]${charging_sym[${sym_idx}]}#[default] "
+# 				fi
+# 		elif (( $battery_quantity > 50 )); then
+# 				if (( $battery_quantity == 100 )); then
+# 						battery=" test "
+# #						battery=" ${battery_quantity}% #[fg=colour082]${discharging_sym[0]}#[default] "
+# 				fi
+# 				battery=" ${battery_quantity}% #[fg=colour050]${discharging_sym[${sym_idx}]}#[default] "
+# 		elif (( $battery_quantity > 20 )); then
+# 				battery=" ${battery_quantity}% #[fg=colour011]${discharging_sym[${sym_idx}]}#[default] "
+# 		else
+# 				battery=" ${battery_quantity}% #[fg=colour009]${discharging_sym[${sym_idx}]}#[default] "
+# 		fi
+# 		echo $battery
+# fi

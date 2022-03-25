@@ -1,3 +1,13 @@
+# 2020-1-18 ** テキスト処理コマンド導入のため記載
+# 参考サイト "Qiita テキスト処理のための標準的なコマンド群の macOS への導入手順"
+
+# in ~/.zshenv, executed `unsetopt GLOBAL_RCS` and ignored /etc/zshrc
+[ -r /etc/zshrc ] && . /etc/zshrc
+
+# 2020-1-18 ** 記載文終了
+
+
+
 # Created by newuser for 5.7.1
 
 export PATH=$PATH:$HOME/bin
@@ -20,8 +30,10 @@ fi
 
 # Customize to your needs...
 
-
-
+# ===== 環境変数 =====
+# --- XDG ---
+#export XDG_CONFIG_HOME=~/.config
+export MY_COMMAND=${HOME}/.dotfiles/seldMade
 
 
 # ━━━━━━━━━     ＊＊＊ 自己記載 ＊＊＊     ━━━━━━━━━
@@ -37,13 +49,16 @@ fi
 
 
 
+# - - - 環境変数 - - -
+export PGDATA=/usr/local/var/postgres
+export FZF_CTRL_T_COMMAND="rg --files --hidden --follow --glob '!.git/*'"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=full --line-range :100 {}'"
+#export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=header,grid --line-range :100 {}'"
 
 # ━━━━━━━━━     === 補完機能関係 ===     ━━━━━━━━━
-#                                                 
-#                                                 
-#                                                 
-
-
+                                                 
+                                                 
+                                                 
 # 補完機能を有効にする
 autoload -Uz compinit; compinit
 # 補完リストの選択候補ををハイライト
@@ -51,9 +66,8 @@ zstyle 'completion:*' menu select
 # 入力ミス時に似たコマンドを表示
 setopt correct
 
-#                                                 
-#                                                 
-#                                                 
+                                                 
+                                                 
 # ━━━━━━━━━   === 補完機能関係終了 ===   ━━━━━━━━━
 
 
@@ -94,14 +108,6 @@ zstyle ':vcs_info:*' formats "%{%F{046}%} %b %{%f%}%c%u"
 zstyle ':vcs_info:*' actionsformats "%{%K{196}%F{227}%} %b | ! %a %{%f%k%}%c%u"
 
 RPROMPT='${vcs_info_msg_0_}'
-
-# zstyle ':vcs_info:git:*' check-for-changes true
-# zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-# zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-# zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-# zstyle ':vcs_info:*' actionformats '[%b|%a]'
-# precmd () { vcs_info }
-# RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 
 
@@ -160,12 +166,19 @@ bindkey "^S" history-incremental-search-forward
 
 
 
-# Homebrew と anaconda の干渉回避( brew じだけ anaconda のパスを取り除く)
-alias brew="env PATH=${PATH/${HOME}\/.pyenv\/shims:/} brew"
-
+# Homebrew と anyenv の干渉回避( brew 時だけ anaconda のパスを取り除く)
+alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
 # 次作コマンドなど。必要に応じてコメントアウト
 # iTerm2の透過度変更スクリプト
-alias tp=it_transparency.sh
+#alias tp=transparency.sh
+# Google Chrome を開く
+#alias chrome="open -a 'Google Chrome'"
+
+# manコマンドの日英語両用設定  参考：https://zenn.dev/kumamoto/articles/d536ac6df8a544
+alias man='env LANG=C man'
+alias jman='env LANG=ja_JP.UTF-8 man'
+
+alias nv='nvim'
 
 
 #                                                      
@@ -175,21 +188,29 @@ alias tp=it_transparency.sh
 
 
 # ━━━━━━━━━     === 表示関係 ===     ━━━━━━━━━
-#                                                      
-#                                                      
-#                                                      
 
 
-# 改行のない行を表示させる(効果が出ないので一時コメントアウト)
-# unsetopt promptcr
+# プロンプトを表示する直前にキャリッジリターンを出力
+setopt prompt_cr
+# prompt_cr オプションによって表示されなかった行を保持する
+setopt prompt_sp
 
 
-#                                                      
-#                                                      
-#                                                      
+
 # ━━━━━━━━━   === 表示関係終了 ===   ━━━━━━━━━
 
 
 
-#pyenv用の設定
-eval "$(pyenv init -)"
+# *** 関数 ***
+
+
+
+mkcd() {
+		mkdir $1 && cd $1 && pwd
+}
+
+
+
+# *** 関数終了 ***
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

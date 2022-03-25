@@ -1,0 +1,4 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/Applications/Eclipse_2019-12.app/Contents/Eclipse/plugins/org.eclipse.ui.themes_1.2.800.v20191127-1314'
+let g:netrw_dirhist_1='/Users/tomohiro/Documents/program/Java/study/Java_file/lib/src/class'

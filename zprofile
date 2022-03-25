@@ -33,6 +33,16 @@ fi
 # Paths
 #
 
+
+# --- anyenv の初期化 ---
+eval "$(anyenv init -)"
+# --- pyenvの初期設定 ---
+eval "$(pyenv init -)"
+# --- pyenvの初期設定 ---
+eval "$(pyenv virtualenv-init -)"
+# --- PYTHONPATHの設定 ---
+export PYTHONPATH="$HOME/py/mypackage:$PYTHONPATH"
+
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 

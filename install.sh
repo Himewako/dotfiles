@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -exuo pipefail
 
 : "getDirectoryPath" && {
 		#　本ファイル が存在するカレントディレクトリの絶対パスをカレントディレクトリを移動せずに取得

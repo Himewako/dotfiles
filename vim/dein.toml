@@ -1,0 +1,41 @@
+# Required:
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# 置換リアルタイムハイライト
+[[plugins]]
+repo = 'markonm/traces.vim'
+
+# 翻訳機能
+[[plugins]]
+repo = 'skanehira/translate.vim'
+
+# fzf曖昧検索
+[[plugins]]
+repo = 'junegunn/fzf'
+build_on = '''
+./install -all
+'''
+merged = '0'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+
+[[plugins]]
+repo = 'preservim/nerdtree' 
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
