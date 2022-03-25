@@ -1,2 +1,2 @@
 EXCLUDES="README*.md LICENSE install.sh selfMade"
-DOTFILES_DIRS="$HOME/.dotfiles $HOME/.dotfiles-local"
+DOTFILES_DIRS="$HOME/dotfiles $HOME/dotfiles-local"

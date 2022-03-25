@@ -33,7 +33,6 @@ fi
 # ===== 環境変数 =====
 # --- XDG ---
 #export XDG_CONFIG_HOME=~/.config
-export MY_COMMAND=${HOME}/.dotfiles/seldMade
 
 
 # ━━━━━━━━━     ＊＊＊ 自己記載 ＊＊＊     ━━━━━━━━━
