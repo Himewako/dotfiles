@@ -1,30 +1,21 @@
-# status_code () {
-# 		local ok="(｡╹ω╹｡)何する〜? < "
-# 		local ng="(ｏдｏlll%)できんかった < "
-# 
-# 		local color face reset
-# 		
-# 		color="%{%(?.${fg[green]}.${fg[blue]})%}"
-# 		face="%(?!${ok}!${ng})"
-# 		reset="%{${reset_color}%}"
-# 
-# 		echo "${color}${face}${reset}"
-# }
-
-
 upper_left () {
-		local letter name_c path_c shape_cn shape_cp name path shape folder man
+		local brack white blue green yelow
+		brack='#3A3226'
+		white='#FFFFFB'
+		blue='#81C7D4'
+		green='#7BA23F'
+		yelow='#E9CD4C'
 
-		letter="%{%F{236}%}"
-		name_c="%{%K{178}%}"
-		path_c="%{%K{070}%}"
-		shape_cn="%{%F{178}%}"
-		shape_cp="%{%F{070}%}"
-		name=" %n "
-		path=" %d "
-		shape='\uE0B0'
-		folder=' \U1F4C2'
-		man=' \U1F464'
+		local shape apple man folder
+		shape='%{\uE0B0%2G%}'
+		apple='%{\uF302%2G%}'
+		man='%{\uF007%2G%}'
+		folder='%{\uF07C%2G%}'
 
- 		echo "${letter}${name_c}${man}${name}${path_c}${shape_cn}${shape}${letter}${folder}${path}%{%k%}${shape_cp}${shape}%{%f%}"
+		local mark directory username
+		mark="%{%K{${blue}}%F{${white}}%} ${apple} %{%K{${yelow}}%F{${blue}}%}${shape}"
+		username="%{%F{${brack}}%} ${man} %n %{%K{${green}}%F{${yelow}}%}${shape}"
+		directory="%{%F{${brack}}%} ${folder} %d %{%k%F{${green}}${shape}%}"
+
+		echo "${mark}${username}${directory}"
 }

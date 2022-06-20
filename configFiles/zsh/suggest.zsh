@@ -1,14 +1,16 @@
 suggest () {
-		local color yes no about edit message
+		local color suggest reset yes no about edit message
 
-		color="${fg[red]}"
+		color='%{%F{#E83015}%}'
+		suggest='%{%F{#DC9FB4}%}'
+		reset='%{%f%}'
 
-		yes="${fg[green]}それだ(y)${reset_color}"
-		no="${fg[red]}違ーう(n)${reset_color}"
-		about="${fg[blue]}やっぱなし(a)${reset_color}"
-		edit="${fg[cyan]}直す〜(e)${reset_color}"
+		yes="%{%F{#7BA23F}%}それだ(y)${reset}"
+		no="%{%F{#268785}%}違ーう(n)${reset}"
+		about="%{%F{#F75C2F}%}やっぱなし(a)${reset}"
+		edit="%{%F{#F7C242}%}直す〜(e)${reset}"
 
-		message="${color}( ╹✖╹)?${reset_color} < もしかして ${color}%B%r%b${reset_color} かい？ [${yes},${no},${about},${edit}]: "
+		message="${color} ( ╹✖╹)?${reset} < もしかして ${suggest}%B%r%b${reset} かい？ [${yes}|${no}|${about}|${edit}]: "
 
-		echo "${suggest}${message}"
+		echo "${message}"
 }
