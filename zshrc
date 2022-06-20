@@ -14,7 +14,7 @@ export PATH=$PATH:$HOME/bin
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-autoload -U promptinit; promptinit
+autoload -Uz promptinit; promptinit
 
 #
 # Executes commands at the start of an interactive session.
@@ -30,9 +30,6 @@ fi
 
 # Customize to your needs...
 
-# ===== 環境変数 =====
-# --- XDG ---
-#export XDG_CONFIG_HOME=~/.config
 
 
 # ━━━━━━━━━     ＊＊＊ 自己記載 ＊＊＊     ━━━━━━━━━
@@ -42,7 +39,7 @@ fi
 if [ -d $ZSH_CONFIG_DIR -a -r $ZSH_CONFIG_DIR -a -x $ZSH_CONFIG_DIR ]; then
 		for i in $ZSH_CONFIG_DIR/*;
 		do
-				[[ ${i##*/} = *.zsh ]] && [ \( -f $i -o -h $i \) -a -r $i ] && . $i
+				[[ ${i##*/} = *.zsh ]] && [ \( -f $i -o -L $i \) -a -r $i ] && . $i
 		done
 fi
 
@@ -74,39 +71,17 @@ setopt correct
 
 
 
-# バージョン管理システムの情報表示機能を使う
-autoload -Uz vcs_info
 # プロンプトを表示するときに最初に変数展開をしてくれるオプション
 setopt prompt_subst
-# プロンプト表示前に実行される関数
-precmd () { vcs_info }
 
 
 PROMPT='
 `upper_left`
 `status_code`'
 
-PROMPT2='[%n]> '
+PROMPT2='[%_]> '
 
 SPROMPT='`suggest`'
-
-
-
-# vcs_infoの設定のカスタマイズ
-# 有効にする(指定してgitのみにしてる)
-zstyle ':vcs_info:*' enable git
-# formatsの%uと%cを使えるようにする
-zstyle ':vcs_info:git:*' check-for-changes true
-# ステージされているがコミットされていないファイルがあるときの設定
-zstyle ':vcs_info:git:*' stagedstr "%{%F{226}%}+%{%f%}"
-# ステージされていないファイルがあるときの設定
-zstyle ':vcs_info:git:*' unstagedstr "%{%F{196}%}!%{%f%}"
-# vcs_info_msg_0_で表示する内容の設定
-zstyle ':vcs_info:*' formats "%{%F{046}%} %b %{%f%}%c%u" 
-# rebase途中やmergeでコンフリクトが発生したり等の特別な状況で表示される
-zstyle ':vcs_info:*' actionsformats "%{%K{196}%F{227}%} %b | ! %a %{%f%k%}%c%u"
-
-RPROMPT='${vcs_info_msg_0_}'
 
 
 

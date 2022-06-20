@@ -1,10 +1,12 @@
 #!/bin/zsh
 
-start=`echo "ibase=16; $1" | bc`
-last=`echo "ibase=16; $2" | bc`
-count=$((last - start))
+startpre=`echo "$1" | tr '[:lower:]' '[:upper:]'`
+lastpre=`echo "$2" | tr '[:lower:]' '[:upper:]'`
+start=`echo "ibase=16; ${startpre}" | bc`
+last=`echo "ibase=16; ${lastpre}" | bc`
+count=$((last - start + 1))
 
-for ((i=0; i<(${count} + 1); i++))
+for ((i=0; i<${count}; i++))
 do
 		code=$((i + start))
 		show=`echo "obase=16; ${code}" | bc`

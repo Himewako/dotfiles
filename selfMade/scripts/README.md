@@ -11,3 +11,4 @@ it_transparency.sh
 
 show_uniChar.sh
 第一、第二引数に16進数で範囲指定。第一引数　〜　第二引数までの範囲の指定unicodeの文字一覧表示スクリプト。
+unicodeの指定は大文字16進数4桁

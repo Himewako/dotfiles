@@ -1,2 +1,2 @@
-EXCLUDES="README*.md LICENSE install.sh selfMade"
+EXCLUDES="README*.md LICENSE install.sh selfMade nvim"
 DOTFILES_DIRS="$HOME/dotfiles $HOME/dotfiles-local"
